@@ -1,0 +1,21 @@
+// To change odoo community theme color
+
+$o-community-color: #46BEB2;
+$o-brand-odoo: $o-community-color;
+$o-brand-primary: #4A8EC6;
+
+.o_home_menu_background {
+    background: url(/web_enterprise/static/src/img/home-menu-bg-overlay.svg),
+        linear-gradient(to right bottom, #46BEB2, #0094CE);
+    background-size: cover;
+}
+
+.o_kanban_view .o_kanban_record.o_kanban_record_has_image_fill .o_kanban_image_fill_left {
+    max-height: 95px;
+    border-radius: 50%;
+    margin-top: 1% !important;
+}
+
+.text-covid19 {
+    color: #0047a0 !important;
+}
