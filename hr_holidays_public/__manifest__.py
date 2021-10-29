@@ -3,8 +3,8 @@
 
 {
     "name": "HR Holidays Public",
-    "version": "13.0.3.0.0",
-    "license": "AGPL-3",
+    #"version": "13.0.3.0.0",
+    "license": "LGPL-3",
     "category": "Human Resources",
     "author": "Michael Telahun Makonnen, "
     "Tecnativa, "
@@ -22,4 +22,5 @@
         "wizards/holidays_public_next_year_wizard.xml",
     ],
     "installable": True,
+    
 }
