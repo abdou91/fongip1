@@ -1,8 +1,8 @@
 <odoo>
   <data>
     <!-- ************Entreprise ****************** -->
-      <record id="fongip_entreprise_view_form" model="ir.ui.view">
-      <field name="name">fongip.entreprise.form.inherit</field>
+      <record id="res_partner_inherit_form" model="ir.ui.view">
+      <field name="name">res.partner.form.inherit</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field eval="18" name="priority"/>
@@ -20,7 +20,7 @@
 
         <xpath expr="//field[@name='email']" position="after">
             <!--field name="type_entreprise_id" attrs="{'invisible':[('company_type','=','person')]}"/-->
-            <field name="forme_juridique_id" attrs="{'invisible':[('company_type','=','person')]}"/>
+            <field name="legal_status_id" attrs="{'invisible':[('company_type','=','person')]}"/>
             <!--field name="ninea" attrs="{'invisible':[('company_type','=','person')]}"/-->
             <!--field name="registre_commerce" attrs="{'invisible':[('company_type','=','person')]}"/-->
         </xpath>
