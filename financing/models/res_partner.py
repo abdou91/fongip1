@@ -46,4 +46,4 @@ class Filiere(models.Model):
 	_description = 'Filiere'
 
 	name = fields.Char(string = "Nom")
-	activity_sector_id = fields.Many2one('actvity.sector')
+	activity_sector_id = fields.Many2one('activity.sector',string = "Secteur d'activité")

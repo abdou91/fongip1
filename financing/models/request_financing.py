@@ -22,7 +22,7 @@ class FinancingRequest(models.Model):
     credit_requested = fields.Monetary(string = "Crédit sollicité")
     quotite = fields.Float(string = "Quotité de garantie")
     guarantee_amount = fields.Monetary(string = "Garantie éventuelle",compute = '_compute_guarantee_amount',store=True)
-    transmission_date = fields.Date(string = "Date d'imputation à l'ingénieur")
+    transmission_date = fields.Date(string = "Date de transmission")
     number_of_job = fields.Integer(string = "Nombre d'emplois")
     imputation_date = fields.Date(string = "Date d'imputation à l'ingénieur")
     transmitted_to = fields.Many2one('hr.employee',string = "Transmis à")
