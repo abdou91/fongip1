@@ -18,7 +18,7 @@ class FinancingRequest(models.Models):
 		RECEPTION_MODE,
 		default="dossier_physique",
 		string = "Mode de réception"
-		)
+	)
 	currency_id = fields.Many2one(
         'res.currency', 'Currency', default=lambda self: self.env.company.currency_id.id
     )
