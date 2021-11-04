@@ -1,0 +1,86 @@
+<odoo>
+  <data>
+    <!--*************Request financing***************** -->
+    <record id="financing_request_form" model="ir.ui.view">
+      <field name="name">financing.request.form</field>
+      <field name="model">financing.request</field>
+      <field name="arch" type="xml">
+        <form string="Demande de financement">
+          <sheet>
+            <group col="2">
+              <group>
+                <field name="reception_mode"/>
+                <field name="transmission_date"/>
+                <field name="transmitted_to"/>
+                <field name="partner_id"/>
+                <field name="imputation_date"/>
+              </group>
+              <group>
+                <field name="project_cost"/>
+                <field name="credit_requested"/>
+                <field name="quotite"/>
+                <field name="guarantee_amount"/>
+                <field name="number_of_job"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="financing_request_tree" model="ir.ui.view">
+      <field name="name">financing.request.tree</field>
+      <field name="model">financing.request</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="transmission_date"/>
+          <field name="reception_mode"/>
+          <field name="partner_id"/>
+          <field name="project_cost"/>
+          <field name="credit_requested"/>
+          <field name="quotite"/>
+          <field name="guarantee_amount"/>
+          <field name="number_of_job"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="financing_request_action">
+      <field name="name">Demande de financement</field>
+      <field name="res_model">financing.request</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer une demande de financement
+        </p>
+      </field>
+    </record>
+
+    <menuitem
+      name="Financement"  
+      id="menu_root"
+      groups="hr.group_hr_user"
+      web_icon="gec,static/description/icon.png"
+      sequence="100"
+      />
+    <menuitem 
+              name="Financement" 
+              id="menu_financing" 
+              parent="menu_root"
+              />
+    <menuitem 
+              name="Demandes" 
+              id="menu_financing_request" 
+              parent="menu_financing"
+              action="financing_request_action"
+              sequence="10"
+              />
+    <menuitem 
+              name="Configuration" 
+              id="menu_configuration" 
+              parent="menu_financing"
+              sequence="20"
+              />
+  </data>
+</odoo>
