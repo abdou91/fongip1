@@ -31,7 +31,7 @@ class FinancingRequest(models.Model):
     @api.depends('credit_requested','quotite')
     def _compute_guarantee_amount(self):
     	if self.credit_requested and self.quotite:
-    		self.guarantee_amount = (self.credit_requested * quotite) // 100
+    		self.guarantee_amount = (self.credit_requested * self.quotite) // 100
 
 
 

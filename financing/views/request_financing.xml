@@ -80,7 +80,7 @@
     <menuitem 
               name="Configuration" 
               id="menu_configuration" 
-              parent="menu_financing"
+              parent="menu_root"
               sequence="20"
               />
   </data>
