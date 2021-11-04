@@ -4,7 +4,7 @@
     <!--Email template -->
     <record id="email_template_edi_presence" model="mail.template">
         <field name="name">Presence - Send by Email</field>
-        <field name="email_from">"AIBD Info" &lt;no-reply@aibd.sn&gt;</field>
+        <field name="email_from">"FONGIP Info" &lt;no-reply@aibd.sn&gt;</field>
         <field name="email_to">${object.employee.work_email}</field>
         <field name="subject">Presence</field>
         <field name="model_id" ref="hr_pointage.model_hr_presence"/>
