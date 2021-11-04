@@ -16,7 +16,7 @@ class FinancingRequest(models.Model):
 
     name = fields.Char()
     number = fields.Char(string = "Numéro")
-    reception_mode = fields(RECEPTION_MODE,default="dossier_physique",string = "Mode de réception")
+    reception_mode = fields.Selection(RECEPTION_MODE,default="dossier_physique",string = "Mode de réception")
     currency_id = fields.Many2one('res.currency','Currency',default=lambda self: self.env.company.currency_id.id)
     project_cost = fields.Monetary(string = "Cout du projet")
     credit_requested = fields.Monetary(string = "Crédit sollicité")
