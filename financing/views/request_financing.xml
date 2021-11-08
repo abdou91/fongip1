@@ -110,10 +110,11 @@
                     <field name="legal_status_name"/>
                     <field name="activity_sector_name"/>
                     <field name="region_name"/>
-                    <field name="project_cost"/>
-                    <field name="credit_requested"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="project_cost" options="{'currency_field': 'currency_id'}"/>
+                    <field name="credit_requested" options="{'currency_field': 'currency_id'}"/>
                     <field name="quotite"/>
-                    <field name="guarantee_amount"/>
+                    <field name="guarantee_amount" options="{'currency_field': 'currency_id'}"/>
                     <field name="number_of_job"/>
                     <field name="imputation_date"/>
                     <field name="transmitted_to"/>

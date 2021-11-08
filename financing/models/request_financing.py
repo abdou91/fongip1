@@ -201,6 +201,7 @@ class FinancingRequestLine(models.Model):
     activity_sector_name = fields.Char(string = "Secteur d'activité")
     #sector
     region_name = fields.Char(string = "Région")
+    currency_id = fields.Many2one('res.currency','Currency',default=lambda self: self.env.company.currency_id.id)
     project_cost = fields.Monetary(string = "Cout du projet")
     credit_requested = fields.Monetary(string = "Crédit sollicité")
     quotite = fields.Float(string = "Quotité de garantie")
