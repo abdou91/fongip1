@@ -56,7 +56,7 @@ class FinancingRequestImport(models.Model):
 
     import_date = fields.Datetime(string = "Date d'import")
     filename = fields.Char('File Name')
-    data = fields.Binary('Importer le fichier')
+    data = fields.Binary('Importer les demandes de financement')
     request_line_ids = fields.One2many('financing.request.line','financing_request_id',string = "Ligne de demandes")
     imported_by = fields.Many2one('res.users',string = "Importé par",default = lambda self: self.env.user.id)
     state = fields.Selection([('draft','Brouillon'),('confirmed','Confirmé')],default='draft',string = "Etat")
