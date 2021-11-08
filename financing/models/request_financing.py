@@ -143,7 +143,7 @@ class FinancingRequestImport(models.Model):
                     'customer_company_name',
                     'legal_status_name',
                     'activity_sector_name',
-                    #
+                    'sector_name',
                     'region_name',
                     'project_cost',
                     'credit_requested',
@@ -199,7 +199,7 @@ class FinancingRequestLine(models.Model):
     customer_company_name = fields.Char(string = "Raison sociale entreprise")
     legal_status_name = fields.Char(string = "Forme juridique")
     activity_sector_name = fields.Char(string = "Secteur d'activité")
-    #sector
+    sector_name = fields.Char(string = "Activité")
     region_name = fields.Char(string = "Région")
     currency_id = fields.Many2one('res.currency','Currency',default=lambda self: self.env.company.currency_id.id)
     project_cost = fields.Monetary(string = "Cout du projet")

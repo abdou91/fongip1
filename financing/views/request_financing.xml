@@ -82,9 +82,7 @@
                     type="object"
                     class="oe_highlight"
                     />
-
                 <field name="state" widget="statusbar" readonly="1"/>
-            
           </header>
           <sheet>
             <group col="2">
