@@ -5,3 +5,6 @@ access_financing_filiere,financing_filiere,model_financing_filiere,,1,1,1,1
 access_financing_psp,financing_psp,model_financing_psp,,1,1,1,1
 access_legal_status,leagl_status,model_legal_status,,1,1,1,1
 
+access_financing_request_import,financing_request_import,model_financing_request_import,,1,1,1,1
+access_financing_request_line,financing_request_line,model_financing_request_line,,1,1,1,1
+
