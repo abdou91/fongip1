@@ -36,9 +36,9 @@
         </xpath-->
 
         <xpath expr="//field[@name='title']" position="after">
-          <field name="num_cni" attrs="{'invisible':[('company_type','=','person')]}"/>
-          <field name="genre" attrs="{'invisible':[('company_type','=','person')]}"/>
-          <field name="date_of_birth" attrs="{'invisible':[('company_type','=','person')]}"/>
+          <field name="num_cni" attrs="{'invisible':[('company_type','=','company')]}"/>
+          <field name="genre" attrs="{'invisible':[('company_type','=','company')]}"/>
+          <field name="date_of_birth" attrs="{'invisible':[('company_type','=','company')]}"/>
         </xpath>
         <!--xpath expr="//field[@name='phone']" position="after">
           <field name="code_banque" attrs="{'invisible':[('bank','!=',True)]}"/>
