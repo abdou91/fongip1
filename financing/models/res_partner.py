@@ -16,6 +16,8 @@ class ResPartner(models.Model):
 	genre = fields.Selection(GENRE, string = "Genre",default = "Homme")
 	date_of_birth = fields.Date(string = "Date de naissance")
 
+	#res.partner.industry : secteur d'activite de lentreprise
+
 class FormeJuridique(models.Model):
 	_name = 'legal.status'
 	_description = 'Forme juridique'

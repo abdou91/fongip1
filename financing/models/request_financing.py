@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 from odoo import api, fields, models, _
-from datetime import date
+from datetime import datetime
 import xlrd
 import base64
+from . import excel_utility
 
 
 RECEPTION_MODE = [
@@ -156,12 +157,12 @@ class FinancingRequestImport(models.Model):
         dicos = []
         for i in range(0, len(liste)):
             dicos.append(dict(zip(columns, liste[i])))
-        """for i in range(len(dicos)):
+        for i in range(len(dicos)):
             for key in dicos[i]:
-                if 'display_type' == key:
-                    dicos[i][key] = dicos[i][key].strip()
-                if 'display_type' == key and dicos[i][key] == 'line_sub_section':
-                    dicos[i][key] = 'line_note' """
+                if 'transmission_date' == key and dicos[i][key]:
+                    dicos[i][key] = convert_excel_date_to_python_date(dicos[i][key])
+                if 'imputation_date' == key and dicos[i][key]:
+                    dicos[i][key] = convert_excel_date_to_python_date(dicos[i][key])
 
         return dicos
 
