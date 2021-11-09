@@ -45,7 +45,7 @@ class FongipCreditGarantie(models.Model):
 	project_id = fields.Many2one('fongip.project' , string=u'Projet' , ondelete = 'cascade')
 	origine_credit = fields.Many2one('res.bank' , string=u'Banque' , ondelete = 'cascade')
 	type_credit_id = fields.Many2one('fongip.type_credit' , string=u'Type de crédit')
-	sous_fond_id = fields.Many2one('fongip.sous_fond' , string=u'Sous fonds')
+	sous_fond_id = fields.Many2one('fongip.sous_fonds' , string=u'Sous fonds')
 	currency_id = fields.Many2one('res.currency', 'Currency', 
         default=lambda self: self.env.company.currency_id.id)
 
@@ -73,7 +73,7 @@ class FongipCreditGarantie(models.Model):
 	date_mise_en_place = fields.Date(string=u'Date de mise en place')
 	encours_credit = fields.Monetary(string=u'Encours du crédit')
 	encours_garantie = fields.Monetary(string=u'Encours de la garantie')
-	description = fields.Text(string=u'Objet' , size=1024)
+	description = fields.Text(string=u'Objet')
 	nombre_echeances_impayes = fields.Integer(string=u"Nombre d'échéances impayés" , compute='compute_impayes',store=True)
 	montant_impayes = fields.Monetary(string=u"Montant total des impayés", compute='compute_impayes' , store=True)
 	montant_indemnisations = fields.Monetary(string=u'Montant indemnisation')
