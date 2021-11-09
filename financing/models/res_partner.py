@@ -17,7 +17,22 @@ class ResPartner(models.Model):
 	date_of_birth = fields.Date(string = "Date de naissance")
 	region_id = fields.Many2one('res.country.region',string = "Région")
 
+	ninea = fields.Char(string = "Ninéa")
+	registre_commerce = fields.Char(string = "Registre de commerce")
+	creation_date = fields.Date(string = "Date de création")
+	capital = fields.Float(string="Capital",digits=(12,0))
+	managed_by = fields.Selection([('Homme','Homme'),('Femme','Femme')],default="Homme",string="Dirigé par")
+	company_type_id = fields.Many2one('company.type',string = "Type d'entreprise")
+
+	"""nationalite = fields.Char(string="Nationalité")
+	lieu_naissance = fields.Char(string="Lieu de naissance")
+	first_name = fields.Char(string='Prénom(s)')
+	last_name = fields.Char(string='Nom')
+	tranche_age = fields.Selection(TRANCHE_AGE,"Tranche d'age")"""
 	#res.partner.industry : secteur d'activite de lentreprise
+
+	_sql_constraints = [('ninea_uniq', 'unique (ninea)', "Ce Ninéa existe déjà !")]
+	_sql_constraints = [('registre_commerce_uniq', 'unique (registre_commerce)', "Ce registre de commerce existe déjà !")]
 
 class FormeJuridique(models.Model):
 	_name = 'legal.status'
@@ -34,6 +49,7 @@ class PSP(models.Model):
 	_description = 'Pole sectoriel prioritaire'
 
 	name = fields.Char(string = "Numéro PSP")
+	description = fields.Char(string = "Description")
 
 	_sql_constraints = [('name_uniq', 'unique (name)', "Ce PSP existe déjà !")]
 
@@ -60,4 +76,17 @@ class Region(models.Model):
 	country_id = fields.Many2one('res.country',string = "Pays")
 
 
+class Department(models.Model):
+	_name = 'res.country.department'
+	_description = 'Department'
 
+	name = fields.Char(string = "Nom")
+	code = fields.Char(string = "Code")
+	region_id = fields.Many2one('res.country.region')
+
+class TypeEntreprise(models.Model):
+	_name = 'company.type'
+	_description = "Type d'entreprise"
+
+	name = fields.Char(string = "abréviation")
+	description = fields.Char(string = "Description")
