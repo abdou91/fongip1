@@ -22,7 +22,7 @@ class FinancingRequest(models.Model):
     _description = 'Demande de financement'
 
     name = fields.Char()
-    order_number = fields.Char(string = "Numéro d'ordre", readonly = True)
+    order_number = fields.Char(string = "Numéro d'ordre")
     reception_mode = fields.Selection(RECEPTION_MODE,default="dossier_physique",string = "Mode de réception")
     currency_id = fields.Many2one('res.currency','Currency',default=lambda self: self.env.company.currency_id.id)
     project_cost = fields.Monetary(string = "Cout du projet")
@@ -43,12 +43,12 @@ class FinancingRequest(models.Model):
     	if self.credit_requested and self.quotite:
     		self.guarantee_amount = (self.credit_requested * self.quotite) // 100
 
-    @api.model
+    """@api.model
     def create(self,vals):
         create_date = fields.Datetime.to_string(self.create_date)[0]
         number = self.env['ir.sequence'].next_by_code('financing.request')
         vals['order_number'] = create_date + '-' + number
-        return super(FinancingRequest,self).create(vals)
+        return super(FinancingRequest,self).create(vals)"""
 
 
 class FinancingRequestImport(models.Model):
@@ -101,6 +101,13 @@ class FinancingRequestImport(models.Model):
                             activity_sector = self.env['activity.sector'].search([('name','=',request_line.activity_sector_name)])
                             if activity_sector:
                                 company_dico['activity_sector_id'] = activity_sector.id
+                            #region
+                            region = self.env['res.country.region'].search([('name','=',request_line.region_name)])
+                            if region:
+                                company_dico['region_id'] = region.id
+                            else:
+                                region = self.env['res.country.region'].create({'name':request_line.name})
+                                company_dico['region_id'] = region.id
                             #create company
                             company = self.env['res.partner'].create(company_dico)
                             customer_dico['parent_id'] = company.id

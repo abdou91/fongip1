@@ -15,6 +15,7 @@ class ResPartner(models.Model):
 	num_cni = fields.Char(string="Numéro d'identification nationale")
 	genre = fields.Selection(GENRE, string = "Genre",default = "Homme")
 	date_of_birth = fields.Date(string = "Date de naissance")
+	region_id = fields.Many2one('res.country.region',string = "Région")
 
 	#res.partner.industry : secteur d'activite de lentreprise
 
@@ -57,6 +58,6 @@ class Region(models.Model):
 	name = fields.Char(string = "Nom")
 	code = fields.Char(string = "code")
 	country_id = fields.Many2one('res.country',string = "Pays")
-	
+
 
 
