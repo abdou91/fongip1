@@ -49,3 +49,14 @@ class Filiere(models.Model):
 
 	name = fields.Char(string = "Nom")
 	activity_sector_id = fields.Many2one('activity.sector',string = "Secteur d'activité")
+
+class Region(models.Model):
+	_name = 'res.country.region'
+	_description = 'Region'
+
+	name = fields.Char(string = "Nom")
+	code = fields.Char(string = "code")
+	country_id = fields.Many2one('res.country',string = "Pays")
+	
+
+
