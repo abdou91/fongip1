@@ -173,11 +173,11 @@
                         help="Voir le dossier avant la restructuration">Voir
                         <!--field name="credit_count" widget="statinfo" string="Crédits"/-->
                   </button>
-                  <button name="update_entreprise"
+                  <!--button name="update_entreprise"
                         type="object"
                                 
                         class="oe_stat_button"
-                  />
+                  /-->
                   <!--field name="credit_count" widget="statinfo" string="Crédits"/-->
             </div>
 
