@@ -1,0 +1,138 @@
+<odoo>
+  <data>
+    <record id="fongip_sous_fonds_view_form" model="ir.ui.view">
+      <field name="name">fongip.sous_fonds.form</field>
+      <field name="model">fongip.sous_fonds</field>
+      <field name="arch" type="xml">
+        <form string="Sous Fonds">
+          <sheet>
+              <group col="2">
+                <group>
+                  <field name="name"/>
+                  <field name="code"/>
+                </group>
+                <group>
+                  <field name="description"/>
+                  <field name="managed_by"/>
+                </group>
+              </group>
+              <notebook>
+                <page string = "Programmes">
+                  <field name="programme_ids">
+                    <tree>
+                      <field name="name"/>
+                      <field name="sous_fonds_id"/>
+                      <field name="managed_by"/>
+                      <field name="amount"/>
+                      <field name="frais_gestion"/>
+                      <field name="reference_convention"/>
+                    </tree>
+                  </field>
+                </page>
+              </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_sous_fond_view_tree" model="ir.ui.view">
+      <field name="name">fongip.sous_fonds.tree</field>
+      <field name="model">fongip.sous_fonds</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="fongip_sous_fond_action">
+      <field name="name">Sous Fonds</field>
+      <field name="res_model">fongip.sous_fonds</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer un nouveau sous-fonds.
+        </p>
+      </field>
+    </record>
+
+    <!--+++++++++++++++++++++++++Programmes++++++++++++++++++++-->
+    <record id="fongip_programme_view_form" model="ir.ui.view">
+      <field name="name">fongip.programme.form</field>
+      <field name="model">fongip.programme</field>
+      <field name="arch" type="xml">
+        <form string="Programme">
+          <sheet>
+              <group col="2">
+                <group>
+                  <field name="name"/>
+                  <field name="sous_fonds_id"/>
+                  <field name="managed_by"/>
+                </group>
+                <group>
+                  <field name="currency_id" invisible="1"/>
+                  <field name="amount" options="{'currency_field': 'currency_id'}"/>
+                  <field name="frais_gestion"/>
+                  <field name="reference_convention"/>
+                </group>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_programme_view_tree" model="ir.ui.view">
+      <field name="name">fongip.programme.tree</field>
+      <field name="model">fongip.programme</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="sous_fonds_id"/>
+          <field name="managed_by"/>
+          <field name="amount"/>
+          <field name="frais_gestion"/>
+          <field name="reference_convention"/>
+        </tree>
+      </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="fongip_programme_action">
+      <field name="name">Programmes</field>
+      <field name="res_model">fongip.programme</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer un nouveau programme.
+        </p>
+      </field>
+    </record>
+
+
+    <menuitem 
+              name="Fonds" 
+              id="fonds_menu" 
+              parent="menu_root"
+              sequence="30"
+              />
+
+              <!-- parent="configuration_menu" -->
+
+    <menuitem 
+              name="Sous-fonds" 
+              id="sous_fond_menu"
+              parent="fonds_menu" 
+              action="fongip_sous_fond_action"
+              sequence="10"
+              />
+
+    <menuitem 
+              name="Programmes" 
+              id="programmes_menu" 
+              parent="fonds_menu"
+              action="fongip_programme_action"
+              sequence="20"
+              />
+
+    
+  </data>
+</odoo>

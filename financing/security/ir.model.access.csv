@@ -8,3 +8,8 @@ access_legal_status,leagl_status,model_legal_status,,1,1,1,1
 access_financing_request_import,financing_request_import,model_financing_request_import,,1,1,1,1
 access_financing_request_line,financing_request_line,model_financing_request_line,,1,1,1,1
 
+access_res_country_region,res_country_region,model_res_country_region,,1,1,1,1
+access_res_country_department,res_country_department,model_res_country_department,,1,1,1,1
+
+access_company_type,company_type,model_company_type,,1,1,1,1
+

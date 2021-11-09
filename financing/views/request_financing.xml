@@ -67,26 +67,24 @@
       <field name="model">financing.request.import</field>
       <field name="arch" type="xml">
         <form string="Import des demandes de financement">
-          <sheet>
             <header>
-            <button modifiers="{'invisible':[['state','not in',['draft']]]}"
+                <button modifiers="{'invisible':[['state','not in',['draft']]]}"
                     name="confirm"
                     states="draft"
                     string="Confirmer"
                     type="object"
                     class="oe_highlight"
                     />
-            <button modifiers="{'invisible':[['state','not in',['draft']]]}"
+                <button modifiers="{'invisible':[['state','not in',['draft']]]}"
                     name="clear_all_lines"
                     states="draft"
                     string="Effacer"
                     type="object"
                     class="oe_highlight"
                     />
-
-            <field name="state" widget="statusbar" readonly="1"/>
-            
+                <field name="state" widget="statusbar" readonly="1"/>
           </header>
+          <sheet>
             <group col="2">
               <group>
                 <field name="import_date"/>

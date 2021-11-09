@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+    <!-- ***************Commission de garantie******************* -->
+    <record id="fongip_commission_view_form" model="ir.ui.view">
+      <field name="name">fongip.commission.form</field>
+      <field name="model">fongip.commission</field>
+      <field name="arch" type="xml">
+        <form string="Commission">
+          <sheet>
+            <field name="credit_garantie_id"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="commission_ht" options="{'currency_field': 'currency_id'}"/>
+            <field name="commission_ttc" options="{'currency_field': 'currency_id'}"/>
+            <field name="commission_line_ids">
+              <tree>
+                <field name="periode"/>
+                <field name="capital_debut_periode"/>
+                <field name="capital_rembourse"/>
+                <field name="interet"/>
+                <field name="capital_fin_periode"/>
+                <field name="commission_ht" sum="Total"/>
+                <field name="commission_ttc" sum="Total"/>
+              </tree>
+            </field>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_commission_view_tree" model="ir.ui.view">
+      <field name="name">fongip.commission.tree</field>
+      <field name="model">fongip.commission</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="credit_garantie_id"/>
+          <field name="commission_ht" sum="Total"/>
+          <field name="commission_ttc" sum="Total"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="fongip_commission_action">
+      <field name="name">Commission de garantie</field>
+      <field name="res_model">fongip.commission</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer une commission de garantie.
+        </p>
+      </field>
+    </record>
+    <!-- ***************Commission de garantie******************* -->
+  </data>
+</odoo>

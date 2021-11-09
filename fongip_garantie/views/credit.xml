@@ -1,0 +1,431 @@
+<odoo>
+  <data>
+    <!--  Fongip type de credit                                              -->
+      <record id="fongip_type_credit_view_form" model="ir.ui.view">
+      <field name="name">fongip.type_credit.form</field>
+      <field name="model">fongip.type_credit</field>
+      <field name="arch" type="xml">
+        <form string="Type de crédit">
+          <sheet>
+              <group>
+                <field name="name"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_type_credit_view_tree" model="ir.ui.view">
+      <field name="name">fongip.type_credit.tree</field>
+      <field name="model">fongip.type_credit</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="fongip_type_credit_action">
+      <field name="name">Type de crédit</field>
+      <field name="res_model">fongip.type_credit</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer un nouveau type de crédit.
+        </p>
+      </field>
+    </record>
+
+    <!--     Fongip etat credit                                                 -->
+    <record id="fongip_etat_credit_view_form" model="ir.ui.view">
+      <field name="name">fongip.etat_credit.form</field>
+      <field name="model">fongip.etat_credit</field>
+      <field name="arch" type="xml">
+        <form string="Etat du crédit">
+          <sheet>
+              <group>
+                <field name="name"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_etat_credit_view_tree" model="ir.ui.view">
+      <field name="name">fongip.etat_credit.tree</field>
+      <field name="model">fongip.etat_credit</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="fongip_etat_credit_action">
+      <field name="name">Etat du crédit</field>
+      <field name="res_model">fongip.etat_credit</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer un nouveau etat de crédit.
+        </p>
+      </field>
+    </record>
+    <!-- Credits garantie                                                           -->
+    <record id="fongip_credit_garantie_view_form" model="ir.ui.view">
+      <field name="name">fongip.credit.form</field>
+      <field name="model">fongip.credit</field>
+      <field name="arch" type="xml">
+        <form string="Credits">
+          <header>
+              <button name="compute_commission"
+                    type="object"
+                    string="Calculer les commissions"
+                    class="oe_highlight"
+              />
+              <button name="generer_tableau_amortissement"
+                    type="object"
+                    string="Générer tableau amortissement"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('amortissable','=',False)]}"
+              />
+              <button name="update_tableau_amortissement"
+                    type="object"
+                    string="Mettre à jour le tableau amortissement"
+                    class="oe_highlight"
+                    attrs="{'invisible':[('amortissable','=',False)]}"
+              />
+            </header>
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                context="{'xml_id':'fongip_commission_action'}"
+                                help="Voir les commissions">
+                                <field name="montant_commission"  string="Commission en TTC"/>
+                                <!--field name="nombre_echeances_impayes" widget="statinfo" string="Impayes"/-->
+                            </button>
+
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-book"
+                                context="{'xml_id':'fongip_credit_impaye_action'}"
+                                help="Voir les impayes de cette ligne de credits">
+                                <field name="nombre_echeances_impayes" widget="statinfo" string="Impayes"/>
+                            </button>
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                context="{'xml_id':'fongip_credit_impaye_action'}"
+                                help="Voir les impayes de cette ligne de credits"
+                                >
+                                <field name="montant_impayes"  string="Total impayé"/><!-- widget="statinfo"    -->
+                            </button>
+                        </div>
+            <group col="2">
+              <group>
+                <field name="description"/>
+                <field name="origine_credit"/>
+                <field name="type_credit_id"/>
+                <field name="mise_en_place"/>
+                <field name="duree"/>
+                <field name="taux"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="montant" options="{'currency_field': 'currency_id'}"/>
+                <!--field name="montant_financement"/-->
+                <field name="etat_credit_id"/>
+                <field name="amortissable"/>
+                <field name="differe" attrs="{'invisible':[('amortissable','=',False)]}"/>
+                <field name="duree_differee" attrs="{'invisible':['|',('amortissable','=',False),('differe','=',False)]}"/>
+                <field name="type_remboursement"/>
+              </group>
+              <group>
+                <!--field name="type_garantie"/-->
+                <field name="quotite"/>
+                <field name="montant_garantie" options="{'currency_field': 'currency_id'}"/>
+                <field name="date_premiere_echeance"/>
+                <field name="montant_echeance" options="{'currency_field': 'currency_id'}"/>
+                <field name="montant_commission" options="{'currency_field': 'currency_id'}"/>
+                <field name="taux_commission"/>
+                <field name="action"/>
+                <!--field name="nombre_echeances_impayes"/>
+                <field name="montant_impayes"/-->
+                <field name="project_id"/>
+                
+              </group>
+              <group col="4" colspan="4" string="Tableau amortissement">
+                  <field name="amortissement_line_ids" nolabel="1"/>
+            </group>
+            </group>
+            
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_credit_garantie_view_tree" model="ir.ui.view">
+      <field name="name">fongip.credit.tree</field>
+      <field name="model">fongip.credit</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="description"/>
+          <!--field name="type_garantie"/-->
+          <field name="origine_credit"/>
+          <field name="type_credit_id"/>
+          <field name="duree"/>
+          <field name="montant" sum="Total"/>
+          <field name="quotite"/>
+          <field name="montant_garantie" sum="Total"/>
+          <field name="encours_credit" sum="Total"/>
+          <field name="encours_garantie" sum="Total"/>
+          <field name="etat_credit_id"/>
+          <!--field name="etat_credit_name" invisible="1"/>
+          <button 
+                    name="annuler" 
+                    type="object"
+                    string="Annuler"
+                    attrs="{'invisible': [('etat_credit_name','!=','Non mis en place')]}"
+          />
+          <button 
+                    name="declasser" 
+                    type="object"
+                    string="Déclasser"
+                    attrs="{'invisible': [('etat_credit_name','!=','Impayé')]}"
+                /-->
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="fongip_credit_garantie_action">
+      <field name="name">Credit garantie</field>
+      <field name="res_model">fongip.credit</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('action','!=','archive')]</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer un nouveau credit.
+        </p>
+      </field>
+    </record>
+
+    <!--record id="view_fongip_credit_garantie_search" model="ir.ui.view">
+      <field name="name">fongip.credit.search</field>
+      <field name="model">fongip.credit</field>
+      <field name="arch" type="xml">
+        <search string="">
+          <field name="description" string="Nom"/>
+          <field name="project_id" string="Dossier"/>   
+          <field name="origine_credit" string="Banque"/>
+          <field name="type_credit_id" string="Nature du crédit"/>
+          <field name="sous_fond_id" string="Sous fond"/>
+          <field name="etat_credit_id" string="Etat du crédit"/>
+            <group expand="0" string="Group By...">
+              <filter string="Banques" icon="terp-partner" domain="[]" context="{'group_by':'origine_credit'}"/>
+              <filter string="Dossier" icon="terp-personal" domain="[]"  context="{'group_by':'project_id'}"/>
+              <filter string="Nature du crédit" icon="terp-folder-orange" domain="[]" context="{'group_by':'type_credit_id'}"/>
+              <filter string="Sous fond" icon="terp-stock_effects-object-coorize" domain="[]"  context="{'group_by':'sous_fond_id'}"/>
+              <filter string="Etat du crédit" icon="terp-stock_effects-object-coorize" domain="[]"  context="{'group_by':'etat_credit_id'}"/>
+              <filter string="Mise en place" icon="terp-stock_effects-object-coorize" domain="[]"  context="{'group_by':'mise_en_place'}"/>
+            </group>
+        </search>
+      </field>
+    </record-->
+
+    <!--********************Begin Gestion des impayes****************** -->
+    <record id="fongip_credit_impaye_view_form" model="ir.ui.view">
+      <field name="name">fongip.credit.impaye.form</field>
+      <field name="model">fongip.credit.impaye</field>
+      <field name="arch" type="xml">
+        <form string="Déclaration d'un impayé">
+          <header>
+            <button name="regulariser" type="object"
+                    string="Régulariser"
+                    states="non_regularise"  
+                    class="oe_highlight"
+              />
+              <field name="state" widget="statusbar"/>
+          </header>
+          <sheet>
+            <group col="2">
+              <group>
+                <field name="echeance"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="capital_debut_periode" options="{'currency_field': 'currency_id'}"/>
+                <field name="interet" options="{'currency_field': 'currency_id'}"/>
+                <field name="annuite" options="{'currency_field': 'currency_id'}"/>
+                <!--field name="credit_garantie_id"/-->
+                <!--field name="date_premiere_echeance"/>
+                <field name="date_reporting"/-->
+                <!--field name="echeance_id"/>
+                <field name="montant"/-->
+              </group>
+              <group>
+                <!--field name="name"/-->
+                <!--field name="date_derniere_echeance"/>
+                <field name="nombre_echeances"/-->
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_credit_impaye_view_tree" model="ir.ui.view">
+      <field name="name">fongip.credit.impaye.tree</field>
+      <field name="model">fongip.credit.impaye</field>
+      <field name="arch" type="xml">
+        <tree delete="false" edit="false" create="false">
+          <!--field name="name"/-->
+          <!--field name="credit_garantie_id"/-->
+          <!--field name="date_reporting"/-->
+          <!--field name="montant"/-->
+          <!--field name="date_premiere_echeance"/>
+          <field name="date_derniere_echeance"/>
+          <field name="nombre_echeances"/-->
+          <field name="echeance"/>
+          <field name="capital_debut_periode"/>
+          <field name="interet"/>
+          <field name="annuite"/>
+          <field name="state"/>
+          <field name="date_regularisation"/>
+        </tree>
+      </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="fongip_credit_impaye_action">
+      <field name="name">Impayes</field>
+      <field name="res_model">fongip.credit.impaye</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour déclarer un impayé.
+        </p>
+      </field>
+    </record>
+
+    <!--********************End Gestion des impayes ******************* -->
+    <!-- ***************Remboursements*************** -->
+    <record id="fongip_encaissement_view_form" model="ir.ui.view">
+      <field name="name">fongip.encaissement.form</field>
+      <field name="model">fongip.encaissement</field>
+      <field name="arch" type="xml">
+        <form string="Remboursement">
+          <sheet>
+            <group col="2">
+              <group>
+                <field name="entreprise_id"/>
+                <field name="project_id" domain="[('entreprise_id','=',entreprise_id),('action','!=','archive')]"/>
+                <field name="credit_garantie_id" domain="[('project_id','=',project_id)]"/>
+              </group>
+              <group>
+                <field name="date_paiement"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="montant" options="{'currency_field': 'currency_id'}"/>
+                <field name="observations"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="fongip_encaissement_view_tree" model="ir.ui.view">
+      <field name="name">fongip.encaissement.tree</field>
+      <field name="model">fongip.encaissement</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="credit_garantie_id"/>
+          <field name="date_paiement"/>
+          <field name="montant" />
+          <field name="observations"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="fongip_remboursement_action">
+      <field name="name">Remboursements</field>
+      <field name="res_model">fongip.encaissement</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="xml">
+        <p class="oe_view_nocontent_create">
+          Cliquer pour enregistrer un remboursement.
+        </p>
+      </field>
+    </record>
+    <!-- *************** tableau d'amortissement ************* -->
+    <record id="fongip_amortissement_line_view_tree" model="ir.ui.view">
+      <field name="name">fongip.amortissement.line.tree</field>
+      <field name="model">fongip.amortissement.line</field>
+      <field name="arch" type="xml">
+        <tree string="Tableau d'amortissement" editable="bottom" delete="false">
+          <field name="numero"/>
+          <field name="echeance"/>
+          <field name="annuite" />
+          <field name="capital_rembourse" sum="Total capital remboursé"/>
+          <field name="interet"/>
+          <field name="capital_fin_periode"/>
+          <field name="engagement_garantie"/>
+          <field name="commission_garantie" sum="Total commission garantie"/>
+          <field name="status"/>
+          <button 
+                    name="payer" 
+                    type="object"
+                    string="Payé"
+                    attrs="{'invisible': [('status','=','paye')]}"
+                />
+          <button 
+                    name="impayer" 
+                    type="object"
+                    string="Impayé"
+                    attrs="{'invisible': ['|',('status','=','paye'),('status','=','impaye')]}"
+                />
+        </tree>
+      </field>
+    </record>
+
+<!--  groups="group_dre,group_analyste" -->
+    <menuitem 
+              name="Crédits de garantie" 
+              id="credit_garantie_menu" 
+              parent="menu_root"
+              sequence="20"
+              
+              />
+    <menuitem 
+              name="Liste des credits de garantie" 
+              id="liste_credits_garantie_menu" 
+              parent="credit_garantie_menu"
+              action="fongip_credit_garantie_action"
+              sequence="10"
+              
+              />
+    <menuitem 
+              name="Les impayés" 
+              id="fongip_credit_impaye_menu" 
+              parent="credit_garantie_menu"
+              action="fongip_credit_impaye_action"
+              sequence="20"
+              />
+
+
+    <menuitem 
+              name="Type de crédit" 
+              id="type_credit_menu" 
+              parent="configuration_menu"
+              action="fongip_type_credit_action"
+              sequence="32"
+              /> 
+    <menuitem 
+              name="Etat du crédit" 
+              id="etat_credit_menu" 
+              parent="configuration_menu"
+              action="fongip_etat_credit_action"
+              sequence="33"
+              />
+  </data>
+</odoo>
