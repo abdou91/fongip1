@@ -160,9 +160,9 @@ class FinancingRequestImport(models.Model):
         for i in range(len(dicos)):
             for key in dicos[i]:
                 if 'transmission_date' == key and dicos[i][key]:
-                    dicos[i][key] = convert_excel_date_to_python_date(dicos[i][key])
+                    dicos[i][key] = excel_utility.convert_excel_date_to_python_date(dicos[i][key])
                 if 'imputation_date' == key and dicos[i][key]:
-                    dicos[i][key] = convert_excel_date_to_python_date(dicos[i][key])
+                    dicos[i][key] = excel_utility.convert_excel_date_to_python_date(dicos[i][key])
 
         return dicos
 
