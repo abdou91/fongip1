@@ -89,11 +89,11 @@
       <field name="arch" type="xml">
         <form string="Projet">
           <header>
-            <button name="generate_dossier_number" type="object"
+            <!--button name="generate_dossier_number" type="object"
                     string="Generer N° Dossier"
                     states="draft"  
                     class="oe_highlight"
-              />
+              /-->
 
             <button name="soumettre" type="object"
                     string="Soumettre"
