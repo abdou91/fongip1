@@ -117,12 +117,13 @@ class FinancingRequestImport(models.Model):
         if self.data:
             wb = xlrd.open_workbook(file_contents=base64.decodestring(self.data))
             sheet = wb.sheets()[0]
-            for s in wb.sheets():
-                values = []
-            for row in range(3,s.nrows):
+            values = []
+            """for s in wb.sheets():
+                values = []"""
+            for row in range(3,sheet.nrows):
                 col_value = []
-                for col in range(1,s.ncols):
-                    value = s.cell(row, col).value
+                for col in range(1,sheet.ncols):
+                    value = sheet.cell(row, col).value
                     col_value.append(value)
                 values.append(col_value)
             dicos = self.fusion(values)
