@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 from odoo import api, fields, models, _
-from datetime import datetime
+from datetime import date
 import xlrd
 import base64
-from . import excel_utility
 
 
 RECEPTION_MODE = [
@@ -22,7 +21,7 @@ class FinancingRequest(models.Model):
     _description = 'Demande de financement'
 
     name = fields.Char()
-    order_number = fields.Char(string = "Numéro d'ordre")
+    order_number = fields.Char(string = "Numéro d'ordre", readonly = True)
     reception_mode = fields.Selection(RECEPTION_MODE,default="dossier_physique",string = "Mode de réception")
     currency_id = fields.Many2one('res.currency','Currency',default=lambda self: self.env.company.currency_id.id)
     project_cost = fields.Monetary(string = "Cout du projet")
@@ -43,12 +42,12 @@ class FinancingRequest(models.Model):
     	if self.credit_requested and self.quotite:
     		self.guarantee_amount = (self.credit_requested * self.quotite) // 100
 
-    """@api.model
+    @api.model
     def create(self,vals):
         create_date = fields.Datetime.to_string(self.create_date)[0]
         number = self.env['ir.sequence'].next_by_code('financing.request')
         vals['order_number'] = create_date + '-' + number
-        return super(FinancingRequest,self).create(vals)"""
+        return super(FinancingRequest,self).create(vals)
 
 
 class FinancingRequestImport(models.Model):
@@ -57,7 +56,7 @@ class FinancingRequestImport(models.Model):
 
     import_date = fields.Datetime(string = "Date d'import")
     filename = fields.Char('File Name')
-    data = fields.Binary('Importer le fichier')
+    data = fields.Binary('Importer les demandes de financement')
     request_line_ids = fields.One2many('financing.request.line','financing_request_id',string = "Ligne de demandes")
     imported_by = fields.Many2one('res.users',string = "Importé par",default = lambda self: self.env.user.id)
     state = fields.Selection([('draft','Brouillon'),('confirmed','Confirmé')],default='draft',string = "Etat")
@@ -72,7 +71,7 @@ class FinancingRequestImport(models.Model):
                     dico['number_of_job'] = request_line.number_of_job
                     dico['project_cost'] = request_line.project_cost
                     dico['credit_requested'] = request_line.credit_requested
-                    #dico['guarantee_amount'] = request_line.guarantee_amount
+                    dico['guarantee_amount'] = request_line.guarantee_amount
                     dico['imputation_date'] = request_line.imputation_date
 
                     reception_mode = request_line.reception_mode
@@ -101,13 +100,6 @@ class FinancingRequestImport(models.Model):
                             activity_sector = self.env['activity.sector'].search([('name','=',request_line.activity_sector_name)])
                             if activity_sector:
                                 company_dico['activity_sector_id'] = activity_sector.id
-                            #region
-                            region = self.env['res.country.region'].search([('name','=',request_line.region_name)])
-                            if region:
-                                company_dico['region_id'] = region.id
-                            else:
-                                region = self.env['res.country.region'].create({'name':request_line.name})
-                                company_dico['region_id'] = region.id
                             #create company
                             company = self.env['res.partner'].create(company_dico)
                             customer_dico['parent_id'] = company.id
@@ -125,13 +117,12 @@ class FinancingRequestImport(models.Model):
         if self.data:
             wb = xlrd.open_workbook(file_contents=base64.decodestring(self.data))
             sheet = wb.sheets()[0]
-            values = []
-            """for s in wb.sheets():
-                values = []"""
-            for row in range(3,sheet.nrows):
+            for s in wb.sheets():
+                values = []
+            for row in range(3,s.nrows):
                 col_value = []
-                for col in range(1,sheet.ncols):
-                    value = sheet.cell(row, col).value
+                for col in range(1,s.ncols):
+                    value = s.cell(row, col).value
                     col_value.append(value)
                 values.append(col_value)
             dicos = self.fusion(values)
@@ -152,7 +143,7 @@ class FinancingRequestImport(models.Model):
                     'customer_company_name',
                     'legal_status_name',
                     'activity_sector_name',
-                    'sector_name',
+                    #
                     'region_name',
                     'project_cost',
                     'credit_requested',
@@ -164,12 +155,12 @@ class FinancingRequestImport(models.Model):
         dicos = []
         for i in range(0, len(liste)):
             dicos.append(dict(zip(columns, liste[i])))
-        for i in range(len(dicos)):
+        """for i in range(len(dicos)):
             for key in dicos[i]:
-                if 'transmission_date' == key and dicos[i][key]:
-                    dicos[i][key] = excel_utility.convert_excel_date_to_python_date(dicos[i][key])
-                if 'imputation_date' == key and dicos[i][key]:
-                    dicos[i][key] = excel_utility.convert_excel_date_to_python_date(dicos[i][key])
+                if 'display_type' == key:
+                    dicos[i][key] = dicos[i][key].strip()
+                if 'display_type' == key and dicos[i][key] == 'line_sub_section':
+                    dicos[i][key] = 'line_note' """
 
         return dicos
 
@@ -208,7 +199,7 @@ class FinancingRequestLine(models.Model):
     customer_company_name = fields.Char(string = "Raison sociale entreprise")
     legal_status_name = fields.Char(string = "Forme juridique")
     activity_sector_name = fields.Char(string = "Secteur d'activité")
-    sector_name = fields.Char(string = "Activité")
+    #sector
     region_name = fields.Char(string = "Région")
     currency_id = fields.Many2one('res.currency','Currency',default=lambda self: self.env.company.currency_id.id)
     project_cost = fields.Monetary(string = "Cout du projet")
