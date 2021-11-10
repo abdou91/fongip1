@@ -372,7 +372,7 @@
               sequence="40"
               />
     <menuitem 
-              name="Départements" 
+              name="Département" 
               id="menu_departement" 
               parent="menu_configuration"
               action="department_action"

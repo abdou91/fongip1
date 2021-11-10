@@ -155,14 +155,14 @@
                         class="oe_stat_button"
                         help="Montant total du crédit"
                         >
-                        <field name="montant_total_credit" widget="statinfo" string="Total crédit"/>
+                        <field name="montant_total_credit"  string="Total crédit"/>
                   </button>
                   <button name="return_action_to_open"
                       type="object"
                       class="oe_stat_button"
                       help="Montant total de la garantie"
                       >
-                      <field name="montant_total_garantie" widget="statinfo" string="Total garantie"/>
+                      <field name="montant_total_garantie" string="Total garantie"/>
                   </button>
                   <button name="open_project_before_restructured"
                         type="object"
