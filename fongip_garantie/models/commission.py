@@ -11,6 +11,8 @@ class fongipFacture(models.Model):
 	_name = 'fongip.commission'
 	_description = 'Commission'
 
+	_rec_name = 'credit_garantie_id'
+
 	commission_line_ids = fields.One2many('fongip.commission_line','commission_id',string="Tableau amortissements")
 	credit_garantie_id = fields.Many2one('fongip.credit' , string='credit' , ondelete='cascade')
 	currency_id = fields.Many2one('res.currency', 'Currency', 
