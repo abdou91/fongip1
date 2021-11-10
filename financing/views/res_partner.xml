@@ -21,6 +21,7 @@
         <xpath expr="//field[@name='email']" position="after">
             <!--field name="type_entreprise_id" attrs="{'invisible':[('company_type','=','person')]}"/-->
             <field name="legal_status_id" attrs="{'invisible':[('company_type','=','person')]}"/>
+            <field name="company_type_id" attrs="{'invisible':[('company_type','=','person')]}"/>
             <!--field name="ninea" attrs="{'invisible':[('company_type','=','person')]}"/-->
             <!--field name="registre_commerce" attrs="{'invisible':[('company_type','=','person')]}"/-->
         </xpath>
