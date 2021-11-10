@@ -74,7 +74,7 @@ class Respartner(models.Model):
 		self.ensure_one()
 		xml_id = self.env.context.get('xml_id')
 		if xml_id:
-			res = self.env['ir.actions.act_window']._for_xml_id('fongip_garantie.%s' % xml_id)
+			res = self.env['ir.actions.act_window']._for_xml_id('fongip_garantie.%s' %  xml_id)#for_xml_id('fongip_garantie',xml_id)
 			res.update(
 						context=dict(self.env.context,default_entreprise_id=self.id, group_by=False),
 						domain=[('entreprise_id','=',self.id)]
