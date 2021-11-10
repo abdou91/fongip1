@@ -105,7 +105,7 @@
                                 class="oe_stat_button"
                                 context="{'xml_id':'fongip_commission_action'}"
                                 help="Voir les commissions">
-                                <field name="montant_commission" widget="statinfo" string="Commission en TTC"/>
+                                <field name="montant_commission"  string="Commission en TTC"/>
                                 <!--field name="nombre_echeances_impayes" widget="statinfo" string="Impayes"/-->
                             </button>
 
@@ -123,7 +123,7 @@
                                 context="{'xml_id':'fongip_credit_impaye_action'}"
                                 help="Voir les impayes de cette ligne de credits"
                                 >
-                                <field name="montant_impayes"  widget="statinfo" string="Total impayé"/><!-- widget="statinfo"    -->
+                                <field name="montant_impayes"  string="Total impayé"/><!-- widget="statinfo"    -->
                             </button>
                         </div>
             <group col="2">
