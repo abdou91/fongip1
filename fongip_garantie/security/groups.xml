@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<record id="group_cdac" model="res.groups">
+        	<field name="name">Chef de division analyste cotation</field>
+                <field name="code">cdac</field>
+    	</record>
+
+        <record id="group_dre" model="res.groups">
+            <field name="name">Directeur risque et exploitation</field>
+                <field name="code">cdre</field>
+        </record>
+
+         <record id="group_cdr" model="res.groups">
+        	<field name="name">Chef de département Ingénierie Quantitative et Allocation des Ressources</field>
+                <field name="code">cdr</field>
+    	</record>
+        <record id="group_analyste" model="res.groups">
+        	<field name="name">Analyste</field>
+                <field name="code">anl</field>
+    	</record>
+        <record id="group_iqua" model="res.groups">
+        	<field name="name">Ingénieur Quantitative </field>
+                <field name="code">iqua</field>
+    	</record>
+        <record id="group_cei" model="res.groups">
+        	<field name="name">Comité d’Engagement Interne</field>
+                <field name="code">cei</field>
+    	</record>
+        <record id="group_cdes" model="res.groups">
+        	<field name="name">Chef de département structuration</field>
+                <field name="code">cdes</field>
+    	</record>
+        <record id="group_doar" model="res.groups">
+        	<field name="name">DOAR</field>
+                <field name="code">doar</field>
+    	</record>
+        <record id="group_papar" model="res.groups">
+        	<field name="name">Pôle accompagnement partenariat et Animation Réseau</field>
+                <field name="code">papar</field>
+    	</record>
+        <record id="group_dc" model="res.groups">
+        	<field name="name">Département Comptabilité</field>
+                <field name="code">dc</field>
+    	</record>
+        <record id="group_si" model="res.groups">
+        	<field name="name">Administrateur du Système d’Information</field>
+                <field name="code">si</field>
+    	</record>
+         <record id="group_otr" model="res.groups">
+        	<field name="name">OTR</field>
+                <field name="code">otr</field>
+    	</record>
+
+         <record id="group_ing_projet" model="res.groups">
+        	<field name="name">Ingénieur de projet</field>
+                <field name="code"></field>
+    	</record>
+         <record id="group_chdr" model="res.groups">
+        	<field name="name">Chéf de réseau</field>
+                <field name="code">chdr</field>
+    	</record>
+         <record id="group_cdis" model="res.groups">
+        	<field name="name">Chéf de département ingénierie et structuration</field>
+                <field name="code">cdis</field>
+    	</record>
+         <record id="group_dio" model="res.groups">
+        	<field name="name">Directeur de l'ingénierie et des opèrations</field>
+                <field name="code">dio</field>
+    	</record>
+	</data>
+</odoo>
+
