@@ -1,12 +1,12 @@
 <odoo>
   <data>
     <!-- ************Entreprise ****************** -->
-      <record id="res_partner_inherit_form" model="ir.ui.view">
-      <field name="name">res.partner.form.inherit</field>
+      <!--record id="fongip_entreprise_view_form" model="ir.ui.view">
+      <field name="name">fongip.entreprise.form.inherit</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field eval="18" name="priority"/>
-      <field name="arch" type="xml">
+      <field name="arch" type="xml"-->
         <!--xpath expr="//button[@name='toggle_active']" position="after">
           <button name="return_action_to_open"
                 type="object"
@@ -18,34 +18,33 @@
           </button>
         </xpath-->
 
-        <xpath expr="//field[@name='email']" position="after">
-            <!--field name="type_entreprise_id" attrs="{'invisible':[('company_type','=','person')]}"/-->
-            <field name="legal_status_id" attrs="{'invisible':[('company_type','=','person')]}"/>
-            <field name="company_type_id" attrs="{'invisible':[('company_type','=','person')]}"/>
-            <!--field name="ninea" attrs="{'invisible':[('company_type','=','person')]}"/-->
-            <!--field name="registre_commerce" attrs="{'invisible':[('company_type','=','person')]}"/-->
+        <!--xpath expr="//field[@name='email']" position="after">
+            <field name="type_entreprise_id" attrs="{'invisible':[('company_type','=','person')]}"/>
+            <field name="forme_juridique_id" attrs="{'invisible':[('company_type','=','person')]}"/>
+            <field name="ninea" attrs="{'invisible':[('company_type','=','person')]}"/>
+            <field name="registre_commerce" attrs="{'invisible':[('company_type','=','person')]}"/>
         </xpath>
         <xpath expr="//field[@name='category_id']" position="after">
-          <!--field name="capital" attrs="{'invisible':[('company_type','=','person')]}"/-->
+          <field name="capital" attrs="{'invisible':[('company_type','=','person')]}"/>
           <field name="activity_sector_id" attrs="{'invisible':[('company_type','=','person')]}"/>
           <field name="filiere_id" attrs="{'invisible':[('company_type','=','person')]}" domain="[('activity_sector_id', '=',activity_sector_id )]"/>
           
-        </xpath>
+        </xpath-->
 
         <!--xpath expr="//field[@name='company_type']" position="after">
           <field name="bank" attrs="{'invisible':[('company_type','=','person')]}"/>
         </xpath-->
 
-        <xpath expr="//field[@name='title']" position="after">
-          <field name="num_cni" attrs="{'invisible':[('company_type','=','company')]}"/>
-          <field name="genre" attrs="{'invisible':[('company_type','=','company')]}"/>
-          <field name="date_of_birth" attrs="{'invisible':[('company_type','=','company')]}"/>
-        </xpath>
+        <!--xpath expr="//field[@name='title']" position="after">
+          <field name="num_cni" attrs="{'invisible':[('company_type','=','person')]}"/>
+          <field name="sexe" attrs="{'invisible':[('company_type','=','person')]}"/>
+          <field name="date_naissance" attrs="{'invisible':[('company_type','=','person')]}"/>
+        </xpath-->
         <!--xpath expr="//field[@name='phone']" position="after">
           <field name="code_banque" attrs="{'invisible':[('bank','!=',True)]}"/>
         </xpath-->
-      </field>
-    </record>
+      <!--/field>
+    </record-->
 
     <!--record id="fongip_entreprise_view_tree" model="ir.ui.view">
       <field name="name">fongip.entreprise.tree</field>
@@ -55,10 +54,9 @@
           <field name="name"/>
         </tree>
       </field>
-    </record-->
-    <!-- actions opening views on models -->
+    </record>
     
-    <!--record model="ir.actions.act_window" id="fongip_entreprise_action">
+    <record model="ir.actions.act_window" id="fongip_entreprise_action">
       <field name="name">Entreprises</field>
       <field name="res_model">res.partner</field>
       <field name="view_mode">tree,form</field>
@@ -68,12 +66,11 @@
           Cliquer pour enregistrer une nouvelle entreprise.
         </p>
       </field>
-    </record-->
+    </record>
 
-    <!--********************Forme juridique******************-->
-    <record id="legal_status_form" model="ir.ui.view">
-      <field name="name">legal.status.form</field>
-      <field name="model">legal.status</field>
+    <record id="forme_juridique_view_form" model="ir.ui.view">
+      <field name="name">forme.juridique.form</field>
+      <field name="model">forme.juridique</field>
       <field name="arch" type="xml">
         <form string="Forme juridique">
           <sheet>
@@ -89,20 +86,20 @@
       </field>
     </record>
 
-    <record id="legal_status_tree" model="ir.ui.view">
-      <field name="name">legal_status.tree</field>
-      <field name="model">legal.status</field>
+    <record id="forme_juridique_view_tree" model="ir.ui.view">
+      <field name="name">forme.juridique.tree</field>
+      <field name="model">forme.juridique</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
         </tree>
       </field>
     </record>
-    <!-- actions opening views on models -->
+   
     
-    <record model="ir.actions.act_window" id="legal_status_action">
+    <record model="ir.actions.act_window" id="forme_juridique_action">
       <field name="name">Forme juridique</field>
-      <field name="res_model">legal.status</field>
+      <field name="res_model">forme.juridique</field>
       <field name="view_mode">tree,form</field>
       <field name="help" type="xml">
         <p class="oe_view_nocontent_create">
@@ -110,8 +107,7 @@
         </p>
       </field>
     </record>
-    <!-- ******************Secteurs d'activites***************-->
-    <record id="activty_sector_form" model="ir.ui.view">
+    <record id="fongip_secteur_activite_view_form" model="ir.ui.view">
       <field name="name">activity.sector.form</field>
       <field name="model">activity.sector</field>
       <field name="arch" type="xml">
@@ -123,7 +119,6 @@
                 <field name="psp_id"/>
               </group>
               <group>
-                <!--field name="dossier_count"/-->
               </group>
             </group>
           </sheet>
@@ -131,7 +126,7 @@
       </field>
     </record>
 
-    <record id="activity_sector_tree" model="ir.ui.view">
+    <record id="fongip_secteur_activite_view_tree" model="ir.ui.view">
       <field name="name">activity.sector.tree</field>
       <field name="model">activity.sector</field>
       <field name="arch" type="xml">
@@ -141,9 +136,9 @@
         </tree>
       </field>
     </record>
-    <!-- actions opening views on models -->
     
-    <record model="ir.actions.act_window" id="activity_sector_action">
+    
+    <record model="ir.actions.act_window" id="fongip_secteur_activite_action">
       <field name="name">Secteur d'activité</field>
       <field name="res_model">activity.sector</field>
       <field name="view_mode">tree,form</field>
@@ -154,10 +149,9 @@
       </field>
     </record>
 
-    <!-- ******************Filieres***************-->
-    <record id="financing_filiere_form" model="ir.ui.view">
-      <field name="name">financing.filiere.form</field>
-      <field name="model">financing.filiere</field>
+    <record id="fongip_filiere_view_form" model="ir.ui.view">
+      <field name="name">filiere.form</field>
+      <field name="model">filiere</field>
       <field name="arch" type="xml">
         <form string="Filière">
           <sheet>
@@ -167,7 +161,6 @@
                 <field name="activity_sector_id"/>
               </group>
               <group>
-                <!--field name="dossier_count"/-->
               </group>
             </group>
           </sheet>
@@ -175,9 +168,9 @@
       </field>
     </record>
 
-    <record id="financing_filiere_tree" model="ir.ui.view">
-      <field name="name">financing.filiere.tree</field>
-      <field name="model">financing.filiere</field>
+    <record id="fongip_filiere_view_tree" model="ir.ui.view">
+      <field name="name">filiere.tree</field>
+      <field name="model">filiere</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
@@ -185,11 +178,11 @@
         </tree>
       </field>
     </record>
-    <!-- actions opening views on models -->
     
-    <record model="ir.actions.act_window" id="financing_filiere_action">
+    
+    <record model="ir.actions.act_window" id="fongip_filiere_action">
       <field name="name">Filière</field>
-      <field name="res_model">financing.filiere</field>
+      <field name="res_model">filiere</field>
       <field name="view_mode">tree,form</field>
       <field name="help" type="xml">
         <p class="oe_view_nocontent_create">
@@ -198,8 +191,7 @@
       </field>
     </record>
 
-    <!--********************Type d'entreprise******************-->
-    <!--record id="type_entreprise_view_form" model="ir.ui.view">
+    <record id="type_entreprise_view_form" model="ir.ui.view">
       <field name="name">type.entreprise.form</field>
       <field name="model">type.entreprise</field>
       <field name="arch" type="xml">
@@ -236,44 +228,44 @@
           Cliquer pour enregistrer une nouvelle type d'entreprise.
         </p>
       </field>
-    </record-->
+    </record>
     
-    <!--menuitem 
+    <menuitem 
               name="Entreprise" 
               id="entreprise_menu" 
               parent="configuration_menu"
               action="fongip_entreprise_action"
               sequence="60"
-              /-->
+              />
     <menuitem 
               name="Forme juridique" 
-              id="legal_status_menu" 
-              parent="menu_configuration"
-              action="legal_status_action"
-              sequence="10"
+              id="forme_juridique_menu" 
+              parent="configuration_menu"
+              action="forme_juridique_action"
+              sequence="55"
               />
 
-    <!--menuitem 
+    <menuitem 
               name="Type d'entreprise" 
               id="type_entreprise_menu" 
               parent="configuration_menu"
               action="type_entreprise_action"
               sequence="55"
-              /-->
+              />
    
     <menuitem 
               name="Secteurs d'activités" 
-              id="menu_activity_sector" 
-              parent="menu_configuration"
-              action="activity_sector_action"
-              sequence="20"
+              id="secteur_activite_menu" 
+              parent="configuration_menu"
+              action="fongip_secteur_activite_action"
+              sequence="36"
               />
     <menuitem 
               name="Filières" 
-              id="menu_filiere" 
-              parent="menu_configuration"
-              action="financing_filiere_action"
-              sequence="30"
-              />
+              id="filiere_menu" 
+              parent="configuration_menu"
+              action="fongip_filiere_action"
+              sequence="37"
+              /-->
   </data>
 </odoo>
